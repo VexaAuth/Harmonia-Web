@@ -25,7 +25,7 @@ export default function Home() {
   const isLoading = !stats && !error;
 
   // Animation variants for a "Welcome" feel
-  const containerVars = {
+  const containerVars: any = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -33,7 +33,7 @@ export default function Home() {
     }
   };
 
-  const itemVars = {
+  const itemVars: any = {
     hidden: { opacity: 0, y: 30 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
   };

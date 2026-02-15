@@ -219,7 +219,7 @@ function MetricCard({ icon, label, value, status }: any) {
     return (
         <motion.div
             whileHover={{ y: -5 }}
-            className={`p-6 rounded-[2rem] border ${statusColors[status] || statusColors.good}`}
+            className={`p-6 rounded-[2rem] border ${statusColors[status as keyof typeof statusColors] || statusColors.good}`}
         >
             <div className="flex items-center justify-between mb-4">
                 <div className="p-2 bg-white/5 rounded-xl">
