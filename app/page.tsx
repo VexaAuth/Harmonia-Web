@@ -18,8 +18,8 @@ const getDiscordAsset = (id: string, hash: string | null, type: 'avatars' | 'ico
 };
 
 export default function Home() {
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:2000';
-  const { data: stats, error } = useSWR(`${apiUrl}/api/stats`, fetcher, {
+  // Use local Next.js API route which proxies to the backend (bypasses CORS/mixed content)
+  const { data: stats, error } = useSWR('/api/stats', fetcher, {
     refreshInterval: 5000,
   });
 
