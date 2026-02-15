@@ -18,7 +18,8 @@ const getDiscordAsset = (id: string, hash: string | null, type: 'avatars' | 'ico
 };
 
 export default function Home() {
-  const { data: stats, error } = useSWR('http://miami.vexanode.cloud:2000/api/stats', fetcher, {
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:2000';
+  const { data: stats, error } = useSWR(`${apiUrl}/api/stats`, fetcher, {
     refreshInterval: 5000,
   });
 

@@ -8,8 +8,9 @@ import { Activity, Zap, Server, Wifi, Clock, CheckCircle2, AlertCircle, Trending
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 export default function StatusPage() {
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:2000';
     const [pingTime, setPingTime] = useState<number | null>(null);
-    const { data: stats, error } = useSWR('http://miami.vexanode.cloud:2000/api/stats', fetcher, {
+    const { data: stats, error } = useSWR(`${apiUrl}/api/stats`, fetcher, {
         refreshInterval: 5000,
     });
 
@@ -18,7 +19,7 @@ export default function StatusPage() {
         const measurePing = async () => {
             const start = performance.now();
             try {
-                await fetch('http://miami.vexanode.cloud:2000/api/stats');
+                await fetch(`${apiUrl}/api/stats`);
                 const end = performance.now();
                 setPingTime(Math.round(end - start));
             } catch (err) {
@@ -28,7 +29,7 @@ export default function StatusPage() {
         measurePing();
         const interval = setInterval(measurePing, 5000);
         return () => clearInterval(interval);
-    }, []);
+    }, [apiUrl]);
 
     const isOnline = !error && stats;
     const uptime = isOnline ? '99.9%' : '0%';
